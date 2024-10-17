@@ -9,15 +9,19 @@ python ../train_two_stage_mimic.py \
     --NB_experts 2 \
     --batch_size 32 \
     --path_dataset ../data/mimic_4/mimic-iv-demo/2.2/hosp \
-    --name_classifier ./logs/train/mimic_4/saved_classifier.pth \
-    --lr 0.0001 \
+    --name_classifier ./saved_classifier.pth \
+    --lr 0.0001 0.001 \
     --epochs 5 \
     --save_freq 1 \
-    --log_freq 1 \
     --lambda_1 1 \
     --lambda_2 0.2 \
+    --bound 5 \
     --alpha 1 \
     --beta 0 \
     --warmup 0.1 \
-    --n_points 100 \
-    --save 1 
+    --save 1 \
+    --seed 42 \
+    --dev 1 \
+    --overfit 0 \
+    --test 1
+
