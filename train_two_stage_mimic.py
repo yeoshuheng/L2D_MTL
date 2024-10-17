@@ -61,6 +61,7 @@ def setup_args():
     parser.add_argument("--dev", type=int, default=1) # if 0 we use dev set (subsample) 1 is for full dataset
     parser.add_argument('--name', type=str, default='exp', help='Name experiment')
     parser.add_argument('--name_classifier', type=str, default='model_eval_steps_80.pth', help='classifier name')
+    parser.add_argument('--alpha', type=float, default=1, help='cost to ask')
     parser.add_argument('--beta', type=float, nargs='+', default=[10], help='cost to ask')
     parser.add_argument('--overfit', type=int, default=0, help='overfit: 1 ')
     parser.add_argument('--device', type=str, default='cuda', help='cuda')
@@ -68,7 +69,6 @@ def setup_args():
     parser.add_argument('--path_dataset', type=str, default='/data/mimic_4/', help='Path to dataset')
     parser.add_argument('--extra_data', type=int, default=0, help='Extra data')
     parser.add_argument('--test', type=int, default=1, help='Extra data')
-
 
     args = parser.parse_args()
 
@@ -248,6 +248,7 @@ def main():
     args = setup_args()
     random_seed(args.seed)
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+    args.device=device
     data_loader, dataset = preprocess_data(args)
     for i in range(len(args.lr)):
         for j in range(len(args.lambda_1)):

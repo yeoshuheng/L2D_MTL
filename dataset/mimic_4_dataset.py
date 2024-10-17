@@ -254,14 +254,11 @@ def aggregating_data(args):
 
     return {'train': train_loader_init, 'val': val_loader_init}, dataset
 
-
-
 def preprocess_data(args):
     loader, dataset = aggregating_data(args)
     train_loader = loader['train']
     val_loader = loader['val']
     return {'train': train_loader, 'val': val_loader}, dataset
-
 
 def expert_clusters(args, device, dataloader, dataset, name):
     dir_name = f"./logs/train/{args.dataset}/two_stage_{name}"
@@ -416,9 +413,12 @@ def experts_sampling(args, device, dataloader, dataset, name):
     if args.expert_exp == 'Oracle':
         expert_tr, expert_val = expert_oracle(args, device, dataloader, dataset, name)
 
-    if args.expert_exp == 'Clusters':
+    elif args.expert_exp == 'Clusters':
         expert_tr, expert_val = expert_clusters(args, device, dataloader, dataset, name)
 
+    else:
+        raise NotImplementedError
+    
     return expert_tr, expert_val
 
 

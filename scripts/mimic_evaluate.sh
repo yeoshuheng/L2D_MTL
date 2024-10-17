@@ -2,22 +2,17 @@
 
 cd "$(dirname "$0")"
 
-python statistics_model_mimic.py \
+
+python ../statistics_model_mimic.py \
     --dataset mimic_4 \
-    --classifier transformer \
-    --path_dataset data/mimic_4/mimic-iv-demo/hosp \
-    --expert_exp Cluster \
-    --classifier_name model_eval_steps_80.pth \
-    --path_rejector \ temp
-    --two_stage 0 \
+    --classifier_name transformer \
+    --path_dataset ../data/mimic_4/mimic-iv-demo/2.2/hosp \
+    --expert_exp Oracle \
+    --NB_experts 1 \
+    --name_classifier model_eval_final.pth \
+    --path_rejector ./logs/train/mimic_4/exp_transformer_42_lr_0.0001_lambda_cla1.0/model_final.pth \
     --batch_size 8 \
-    --lr 0.0001 \
-    --epochs 20 \
-    --save_freq 10 \
-    --log_freq 5 \
     --lambda_1 1 \
-    --lambda_2 1 \
+    --lambda_2 0.2 \
     --alpha 1 \
-    --beta 0 \
-    --warmup 0.1 \
-    --n_points 100 
+    --beta 0 

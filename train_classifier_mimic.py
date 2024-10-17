@@ -59,7 +59,7 @@ def setup_args():
     parser.add_argument('--warmup', type=float, default=0.1, help='warmup')
     parser.add_argument('--expert_exp', type=str, default='Oracle', help='expert type')
     parser.add_argument('--lambda_1', type=float, nargs='+' , default=[1], help='lambda_pred')
-    parser.add_argument('--lambda_2', type=int, default=1, help='lambda_regression')
+    parser.add_argument('--lambda_2', type=float, default=1, help='lambda_regression')
     parser.add_argument("--log_freq", type=int, default=2)
     parser.add_argument("--save_freq", type=int, default=2)
     parser.add_argument("--dev", type=int, default=0) # if 0 we use dev set (subsample) 1 is for full dataset
@@ -194,6 +194,7 @@ def main():
     args = setup_args()
     random_seed(args.seed)
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+    args.device = device
     data_loader, dataset = preprocess_data(args)
 
     for i in range(len(args.lr)):

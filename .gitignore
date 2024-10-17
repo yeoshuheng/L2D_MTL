@@ -1,3 +1,7 @@
 .DS_Store
-./mimic-iv-demo
+*mimic-iv-demo
+*mimic-iv-demo.zip
 ./data
+*__pycache__
+*/wandb
+scripts/logs

@@ -76,7 +76,7 @@ def eval_model(args, device, dataloader, name, dataset, path_rejector):
                                lambda_2=args.lambda_2,
                                alpha_1=args.lambda_1,
                                alpha_2=args.lambda_2,
-                               beta=args.beta, )
+                               beta=args.beta)
     rejector.eval()
     classifier.eval()
     running_loss = 0
@@ -237,15 +237,16 @@ def setup_args():
     parser.add_argument("--dev", type=int, default=1) # if 0 we use dev set (subsample) 1 is for full dataset
     parser.add_argument('--name', type=str, default='exp', help='Name experiment')
     parser.add_argument('--name_classifier', type=str, default='model_eval_steps_80.pth', help='classifier name')
+    parser.add_argument('--alpha', type=float, default=1, help='cost to ask')
     parser.add_argument('--beta', type=float, nargs='+', default=[0], help='cost to ask')
     parser.add_argument('--overfit', type=int, default=0, help='overfit: 1 ')
     parser.add_argument('--device', type=str, default='cuda', help='cuda')
     parser.add_argument('--name_project', type=str, default='two_stage_mimic_metrics', help='Name')
-    parser.add_argument('--path_dataset', type=str, default='./data/mimic-'
+    parser.add_argument('--path_dataset', type=str, default='./data/mimic-iv'
                                                             , help='Path to dataset')
-    parser.add_argument('--name_rejector', type=str, default='', help='path to the rejector')
-    parser.add_argument('--clamp', type=float, default=5, help='clamp')
+    parser.add_argument('--path_rejector', type=str, default='', help='path to the rejector')
     parser.add_argument('--test', type=int, default=1, help='test')
+    parser.add_argument('--clamp', type=int, default=5, help='test')
     args = parser.parse_args()
 
     assert args.clamp==1/args.lambda_2, "clamp should be 1/lambda_2 for lambda_1=1"
@@ -260,6 +261,7 @@ def main():
     #
     random_seed(args.seed)
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+    args.device = device
     data_loader, dataset = preprocess_data(args)
     name = f"test"
     setup_wandb(args, name)

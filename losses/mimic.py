@@ -29,7 +29,6 @@ class MimicLoss:
         out, _ = model(**x_)
         cls_pred, reg_pred, labels_class, labels_reg = (out["classifier_fc"], out["regressor_fc"],
                                                         out["label_class"], out["label_reg"])
-
         labels_class = labels_class.long()
 
         cls_loss = self.cls_loss(cls_pred, labels_class)
