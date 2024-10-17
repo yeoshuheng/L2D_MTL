@@ -16,14 +16,12 @@ export WANDB_API_KEY=yourPublicApiKey
 ```
 
 ## Training
-We provide an example for training both the classifier & two-stage system, as well as evaluating their performance. Run the script with,
+We provide an example for training the two-stage system from a pre-trained classifier, as well as evaluating their performance. The `--expert_exp` argument determines the training setting, `Oracle` represents the Single-Expert oracle experiment whereas `Cluster` represents the multi-expert cluster setting. Run the script,
 ```bash
-bash mimic_train.sh
+bash mimic_train_cluster.sh
 ```
-The `--expert_exp` argument determines the training setting, `Oracle` represents the Single-Expert oracle experiment whereas `Cluster` represents the multi-expert cluster setting.
-
-## Testing
-We also provide a pre-trained two-stage L2D model to replicate the results within the paper. To evaluate this checkpoint, run the script
+for training & evaluating the multiple-expert setting and
 ```bash
-bash mimic_evaluate.sh
+bash mimic_train_oracle.sh
 ```
+for the single-expert oracle setting.
