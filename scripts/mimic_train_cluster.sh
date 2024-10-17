@@ -7,11 +7,11 @@ python ../train_two_stage_mimic.py \
     --classifier_name transformer \
     --expert_exp Clusters \
     --NB_experts 2 \
-    --batch_size 32 \
+    --batch_size 1024 \
     --path_dataset ../data/mimic_4/mimic-iv-demo/2.2/hosp \
     --name_classifier ./saved_classifier.pth \
-    --lr 0.0001 0.001 \
-    --epochs 5 \
+    --lr 0.001 \
+    --epochs 75 \
     --save_freq 1 \
     --lambda_1 1 \
     --lambda_2 0.2 \
