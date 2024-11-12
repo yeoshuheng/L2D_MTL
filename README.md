@@ -3,6 +3,8 @@
 
 This repository contains the code for the **Two-Stage Learning-To-Defer Multi-Task Learning** project.
 
+Our paper can be found [here](https://arxiv.org/abs/2410.15729v2).
+
 ## Setup
 
 ### Requirements
